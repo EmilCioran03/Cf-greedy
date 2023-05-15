@@ -1,0 +1,49 @@
+/*For ai
+, if |v−ai|≤x
+, then ai−x≤v≤ai+x
+.
+
+Then consider using the greedy strategy. We will only change v
+ when we cannot find any possible v
+ to satisfy the current conditions.
+
+Therefore, we can determine the range of v
+. Initially, set l=a1−x,r=a1+x
+, then v∈[l,r]
+. For ai
+, change l=max(l,ai−x),r=min(r,ai+x)
+. Once l>r
+, which means from the last time that we changed v
+ to the current ai
+ we cannot find any possible v
+ to satisfy the all the conditions between the two positions, we should change l=ai−x,r=ai+x
+, and add 1
+ to answer.*/
+ 
+ 
+
+void solve()
+{
+    int n;
+	int x;;
+	cin >> n >> x;int a[n+1];
+	for (int i = 1; i <= n; i++) {
+		cin >> a[i];
+	}
+	x += x;
+	int mn = -1, mx = -1;
+	int ans = 0;
+	for (int i = 1; i <= n; i++) {
+		if (mn == -1) mn = mx = a[i];
+		else {
+			mn = min(mn, a[i]);
+			mx = max(mx, a[i]);
+			if (mx - mn > x) {
+				mn = mx = a[i];
+				ans++;
+			}
+		}
+	}
+	cout << ans<<endl;
+    
+}
